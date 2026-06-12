@@ -1,0 +1,76 @@
+.mark,
+.fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  max-width: 100%;
+}
+
+.fallback {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #111827;
+}
+
+.fallback:hover {
+  color: #6366f1;
+}
+
+.logo {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logoAiSized {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.name {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #111827;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  min-width: 0;
+}
+
+.subdued .name {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.sm .logo {
+  height: 32px;
+  max-width: 120px;
+}
+
+.sm .name {
+  font-size: 14px;
+}
+
+.md .logo {
+  height: 40px;
+  max-width: 140px;
+}
+
+.md .name {
+  font-size: 16px;
+}
+
+.lg .logo {
+  height: 48px;
+  max-width: 180px;
+}
+
+.lg .name {
+  font-size: 18px;
+}
+
+.inverted .name {
+  color: #e5e7eb;
+}

@@ -1,0 +1,232 @@
+.card {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+  user-select: none;
+}
+
+.cardInner {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--card-border, #e5e7eb);
+  padding: 40px 32px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 32px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardInner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--card-accent, #6366f1);
+}
+
+.body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  line-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.watermark {
+  position: absolute;
+  right: -10%;
+  bottom: -14%;
+  color: var(--card-accent, #6366f1);
+  opacity: 0.13;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  transform: rotate(-14deg);
+  transform-origin: center center;
+}
+
+.watermarkIcon {
+  font-size: clamp(148px, 32vw, 240px) !important;
+}
+
+.logo img {
+  display: block;
+  max-height: 48px !important;
+  height: auto !important;
+  max-width: 180px !important;
+  width: auto !important;
+  object-fit: contain;
+}
+
+.title {
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #111827;
+  margin: 0;
+  max-width: 16ch;
+}
+
+.orgName {
+  margin: 0;
+  font-size: clamp(0.9375rem, 2.2vw, 1.0625rem);
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.titleEditable {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.editableCard .titleEditable {
+  cursor: pointer;
+}
+
+.card.capture {
+  width: 640px;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card.capture .cardInner {
+  width: 640px;
+  height: 360px;
+  container-type: inline-size;
+  container-name: title-card;
+  padding: 5.62cqw 4.69cqw;
+}
+
+@media (max-width: 767px) {
+  .card {
+    width: 100%;
+    max-width: none;
+    padding: 0 32px;
+  }
+
+  .card .cardInner {
+    min-height: min(62dvh, 520px);
+    height: auto;
+    padding: 44px 36px;
+    overflow: hidden;
+  }
+
+  .card .body {
+    flex: 1 1 auto;
+    min-height: auto;
+  }
+
+  .card.presentation {
+    width: 100%;
+    max-width: none;
+    padding: 0 32px;
+  }
+
+  .card.presentation .cardInner {
+    min-height: min(62dvh, 520px);
+    height: auto;
+    padding: 44px 36px;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 768px) {
+  .card {
+    --card-w: min(
+      calc(var(--desktop-card-height, 480px) * 16 / 9),
+      calc(100vw - 48px)
+    );
+    width: var(--card-w);
+    max-width: none;
+    padding: 0;
+  }
+
+  .card .cardInner {
+    width: 100%;
+    height: calc(var(--card-w) * 9 / 16);
+    container-type: inline-size;
+    container-name: title-card;
+    padding: 5.62cqw 4.69cqw;
+  }
+
+  .card .title {
+    font-size: calc(var(--card-w) * 0.0516);
+    max-width: 16ch;
+  }
+}
+
+@media (min-width: 768px) {
+  .card.presentation {
+    --card-w: min(
+      calc(var(--presentation-card-height, 480px) * 16 / 9),
+      calc(100vw - 48px)
+    );
+    width: var(--card-w);
+    max-width: none;
+    padding: 0;
+  }
+
+  .card.presentation .cardInner {
+    width: 100%;
+    height: calc(var(--card-w) * 9 / 16);
+    container-type: inline-size;
+    container-name: title-card;
+    padding: 5.62cqw 4.69cqw;
+  }
+
+  .card.presentation .title {
+    font-size: calc(var(--card-w) * 0.0516);
+    max-width: 16ch;
+  }
+}
+
+@container title-card (min-width: 0) {
+  .cardInner::before {
+    height: 0.47cqw;
+  }
+
+  .body {
+    gap: 1.88cqw;
+  }
+
+  .logo img {
+    max-height: 5.62cqw !important;
+    max-width: 21.1cqw !important;
+  }
+
+  .orgName {
+    font-size: 2.11cqw;
+  }
+
+  .watermark {
+    right: 1.88cqw;
+    bottom: -2.34cqw;
+    opacity: 0.13;
+    transform: rotate(-14deg);
+  }
+
+  .watermarkIcon {
+    font-size: 26cqw !important;
+  }
+}

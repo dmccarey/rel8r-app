@@ -20,6 +20,9 @@
 # production
 /build
 
+# local briefing storage
+/.data/
+
 # misc
 .DS_Store
 *.pem

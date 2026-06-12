@@ -1,0 +1,19 @@
+.thumb {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.thumbPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+}
+
+.placeholderIcon {
+  font-size: 28px;
+  color: #d1d5db;
+}

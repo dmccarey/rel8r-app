@@ -1,0 +1,33 @@
+.editable {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: inherit;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-radius: 8px;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+  width: fit-content;
+  max-width: 100%;
+}
+
+button.editable {
+  display: inline;
+}
+
+.editable:hover {
+  background: rgba(99, 102, 241, 0.08);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.18);
+}
+
+.editable.selected {
+  background: rgba(99, 102, 241, 0.12);
+  box-shadow: 0 0 0 2px #6366f1;
+}
+
+.editable:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #6366f1;
+}

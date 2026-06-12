@@ -1,0 +1,28 @@
+.modal :global(.ant-modal-body) {
+  padding-top: 12px;
+}
+
+.hint {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+.input {
+  font-size: 14px !important;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.footerActions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}

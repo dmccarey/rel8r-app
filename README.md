@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rel8r
+
+Turn unstructured notes into stakeholder-ready briefing cards.
+
+## Features
+
+- Paste messy notes and generate 4–10 scannable briefing cards with AI
+- Swipeable story view on mobile, arrow navigation on desktop
+- Card types: Status, Progress, Key Insight, Decision Required, Risk, Action Item, Next Steps, Recommendation
+- Shareable URLs (`/brief/[id]`)
+- Presentation mode for clean fullscreen viewing
 
 ## Getting Started
 
-First, run the development server:
+1. Copy the environment file and add your OpenAI API key:
+
+```bash
+cp .env.example .env.local
+```
+
+2. Install dependencies:
+
+```bash
+npm install --legacy-peer-deps
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to use Rel8r.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 15** — App Router
+- **Vercel AI SDK** — Structured output with `generateObject`
+- **Ant Design** — UI components
+- **Framer Motion** — Swipe gestures and card transitions
 
-## Learn More
+## Shareable URLs
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+After generating a briefing, you'll be redirected to `/brief/[id]`. Copy the link to share. Briefings are stored in memory and reset when the server restarts — use a database for production persistence.
