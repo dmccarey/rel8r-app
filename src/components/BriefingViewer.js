@@ -15,6 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import BriefingCard from "./BriefingCard";
 import TitleSlide from "./TitleSlide";
+import OutroSlide from "./OutroSlide";
 import BrandingFields from "./BrandingFields";
 import SlideEditModal from "./SlideEditModal";
 import { cacheBriefing, upsertBriefingIndex } from "@/lib/briefing-cache";
@@ -60,9 +61,11 @@ export default function BriefingViewer({
   const skipRevealReset = useRef(false);
 
   const cards = briefing.cards ?? [];
-  const slideCount = cards.length + 1;
+  const slideCount = cards.length + 2;
   const isTitleSlide = currentIndex === 0;
-  const currentCard = currentIndex > 0 ? cards[currentIndex - 1] : null;
+  const isOutroSlide = currentIndex === slideCount - 1;
+  const currentCard =
+    currentIndex > 0 && !isOutroSlide ? cards[currentIndex - 1] : null;
 
   const getBulletCount = useCallback((card) => {
     if (!card) return 0;
@@ -118,7 +121,7 @@ export default function BriefingViewer({
       cacheBriefing(briefId, data);
       upsertBriefingIndex(briefId, data);
 
-      const newSlideCount = (data.cards?.length ?? 0) + 1;
+      const newSlideCount = (data.cards?.length ?? 0) + 2;
       if (prevIndex >= newSlideCount) {
         setCurrentIndex(Math.max(0, newSlideCount - 1));
       }
@@ -377,7 +380,8 @@ export default function BriefingViewer({
     }
   };
 
-  const slideEditing = !presentationMode && !regenerating && !savingSlideEdit;
+  const slideEditing =
+    !presentationMode && !regenerating && !savingSlideEdit && !isOutroSlide;
 
   if (cards.length === 0) {
     return (
@@ -513,6 +517,8 @@ export default function BriefingViewer({
                   editTarget={editTarget}
                   onEditSelect={handleEditSelect}
                 />
+              ) : isOutroSlide ? (
+                <OutroSlide presentation={presentationMode} />
               ) : (
                 <BriefingCard
                   card={currentCard}
@@ -539,7 +545,11 @@ export default function BriefingViewer({
                 className={`${styles.dot} ${i === currentIndex ? styles.dotActive : ""}`}
                 onClick={() => goTo(i)}
                 aria-label={
-                  i === 0 ? "Go to title slide" : `Go to card ${i}`
+                  i === 0
+                    ? "Go to title slide"
+                    : i === slideCount - 1
+                      ? "Go to outro slide"
+                      : `Go to card ${i}`
                 }
                 aria-current={i === currentIndex ? "true" : undefined}
               />
