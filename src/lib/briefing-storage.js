@@ -5,8 +5,12 @@ const DATA_DIR = path.join(process.cwd(), ".data", "briefings");
 const THUMB_DIR = path.join(DATA_DIR, "thumbs");
 const BRIEFING_PREFIX = "briefings/";
 
+function usesBlobStorage() {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
+}
+
 function storageMode() {
-  if (process.env.BLOB_READ_WRITE_TOKEN) return "blob";
+  if (usesBlobStorage()) return "blob";
   if (process.env.VERCEL) return "missing-blob";
   return "filesystem";
 }
@@ -37,7 +41,7 @@ async function readStream(stream) {
 
 function missingBlobError() {
   return new Error(
-    "Persistent storage is not configured. Create a Vercel Blob store for this project (Storage → Blob) and redeploy so BLOB_READ_WRITE_TOKEN is available."
+    "Persistent storage is not configured. Connect a Vercel Blob store to this project (Storage → Blob) and redeploy so BLOB_STORE_ID is available."
   );
 }
 
