@@ -1,8 +1,13 @@
-import fs from "fs/promises";
-import path from "path";
-
-const DATA_DIR = path.join(process.cwd(), ".data", "briefings");
-const THUMB_DIR = path.join(DATA_DIR, "thumbs");
+import {
+  getBriefingJson,
+  getBriefingThumbnail as readBriefingThumbnail,
+  hasBriefingThumbnailOnDisk,
+  listBriefingJsonIds,
+  localJsonPath,
+  localThumbPath,
+  saveBriefingJson,
+  saveBriefingThumbnail as persistBriefingThumbnail,
+} from "./briefing-storage";
 
 const globalForBriefings = globalThis;
 if (!globalForBriefings.__briefingStore) {
@@ -10,23 +15,13 @@ if (!globalForBriefings.__briefingStore) {
 }
 const memoryStore = globalForBriefings.__briefingStore;
 
-function filePath(id) {
-  return path.join(DATA_DIR, `${id}.json`);
-}
-
-async function ensureDir() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
-}
-
 export async function saveBriefing(id, briefing) {
   const data = {
     ...briefing,
     createdAt: briefing.createdAt ?? Date.now(),
   };
   memoryStore.set(id, data);
-
-  await ensureDir();
-  await fs.writeFile(filePath(id), JSON.stringify(data), "utf8");
+  await saveBriefingJson(id, data);
 }
 
 export async function getBriefing(id) {
@@ -34,14 +29,11 @@ export async function getBriefing(id) {
     return memoryStore.get(id);
   }
 
-  try {
-    const content = await fs.readFile(filePath(id), "utf8");
-    const data = JSON.parse(content);
+  const data = await getBriefingJson(id);
+  if (data) {
     memoryStore.set(id, data);
-    return data;
-  } catch {
-    return null;
   }
+  return data;
 }
 
 function summarizeBriefing(id, briefing) {
@@ -58,7 +50,7 @@ function summarizeBriefing(id, briefing) {
 }
 
 export function briefingThumbnailPath(id) {
-  return path.join(THUMB_DIR, `${id}.png`);
+  return localThumbPath(id);
 }
 
 export function hasBriefingThumbnail(id) {
@@ -70,28 +62,12 @@ async function markThumbnailExists(id) {
 }
 
 export async function saveBriefingThumbnail(id, buffer) {
-  await ensureDir();
-  await fs.mkdir(THUMB_DIR, { recursive: true });
-  await fs.writeFile(briefingThumbnailPath(id), buffer);
+  await persistBriefingThumbnail(id, buffer);
   await markThumbnailExists(id);
 }
 
 export async function getBriefingThumbnail(id) {
-  try {
-    return await fs.readFile(briefingThumbnailPath(id));
-  } catch {
-    return null;
-  }
-}
-
-async function checkThumbnailOnDisk(id) {
-  try {
-    await fs.access(briefingThumbnailPath(id));
-    await markThumbnailExists(id);
-    return true;
-  } catch {
-    return false;
-  }
+  return readBriefingThumbnail(id);
 }
 
 export async function listBriefings() {
@@ -101,33 +77,26 @@ export async function listBriefings() {
   for (const [id, data] of memoryStore.entries()) {
     if (id.startsWith("thumb:")) continue;
     seen.add(id);
-    await checkThumbnailOnDisk(id);
+    if (await hasBriefingThumbnailOnDisk(id)) {
+      await markThumbnailExists(id);
+    }
     results.push(summarizeBriefing(id, data));
   }
 
-  try {
-    await ensureDir();
-    const files = await fs.readdir(DATA_DIR);
+  for (const id of await listBriefingJsonIds()) {
+    if (seen.has(id)) continue;
 
-    for (const file of files) {
-      if (!file.endsWith(".json")) continue;
+    const data = await getBriefingJson(id);
+    if (!data) continue;
 
-      const id = file.slice(0, -5);
-      if (seen.has(id)) continue;
-
-      try {
-        const content = await fs.readFile(path.join(DATA_DIR, file), "utf8");
-        const data = JSON.parse(content);
-        memoryStore.set(id, data);
-        await checkThumbnailOnDisk(id);
-        results.push(summarizeBriefing(id, data));
-      } catch {
-        // Skip unreadable briefing files
-      }
+    memoryStore.set(id, data);
+    if (await hasBriefingThumbnailOnDisk(id)) {
+      await markThumbnailExists(id);
     }
-  } catch {
-    // Data directory may not exist yet
+    results.push(summarizeBriefing(id, data));
   }
 
   return results.sort((a, b) => b.createdAt - a.createdAt);
 }
+
+export { localJsonPath };
