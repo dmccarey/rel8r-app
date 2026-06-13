@@ -36,6 +36,7 @@ export async function POST(request, { params }) {
     const updated = {
       ...object,
       sourceText: existing.sourceText ?? null,
+      presentationPlan: existing.presentationPlan ?? null,
       branding: existing.branding ?? null,
       updatedAt: Date.now(),
     };

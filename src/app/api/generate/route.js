@@ -2,13 +2,13 @@ import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { nanoid } from "nanoid";
 import { briefingSchema } from "@/lib/schema";
-import { SYSTEM_PROMPT } from "@/lib/prompt";
+import { SYSTEM_PROMPT, buildGeneratePrompt } from "@/lib/prompt";
 import { saveBriefing } from "@/lib/briefing-store";
 import { enrichBranding } from "@/lib/branding";
 
 export async function POST(request) {
   try {
-    const { text, branding } = await request.json();
+    const { text, branding, plan } = await request.json();
 
     if (!text?.trim()) {
       return Response.json({ error: "Text is required" }, { status: 400 });
@@ -25,7 +25,7 @@ export async function POST(request) {
       model: openai("gpt-4o-mini"),
       schema: briefingSchema,
       system: SYSTEM_PROMPT,
-      prompt: `Transform the following unstructured notes into a stakeholder-ready briefing:\n\n${text}`,
+      prompt: buildGeneratePrompt(text, plan),
     });
 
     const enrichedBranding = await enrichBranding(branding ?? {});
@@ -33,6 +33,7 @@ export async function POST(request) {
     const briefing = {
       ...object,
       sourceText: text.trim(),
+      presentationPlan: plan ?? null,
       branding: enrichedBranding,
     };
 

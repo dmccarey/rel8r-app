@@ -212,6 +212,181 @@
   margin-bottom: 20px;
 }
 
+.planCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.04);
+  margin-top: 16px;
+  padding: 20px;
+}
+
+.planHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.planLabel {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #6366f1;
+}
+
+.readyBadge,
+.needsInfoBadge {
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+.readyBadge {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.needsInfoBadge {
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.planMessage {
+  color: #374151;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.planMeta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.planMeta > div {
+  background: #f9fafb;
+  border: 1px solid #f3f4f6;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.metaLabel {
+  display: block;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.planMeta p {
+  color: #111827;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.planSection {
+  border-top: 1px solid #f3f4f6;
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.planSection h3 {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.planSection ul,
+.slidePlan {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.planSection li {
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.slidePlan {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.slidePlan li {
+  background: #fafafa;
+  border: 1px solid #f3f4f6;
+  border-radius: 12px;
+  margin-bottom: 0;
+  padding: 12px;
+}
+
+.slidePlan li > div {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.slidePlan strong {
+  color: #111827;
+  font-size: 14px;
+}
+
+.slidePlan p {
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.slideNumber {
+  align-items: center;
+  background: #eef2ff;
+  border-radius: 999px;
+  color: #4f46e5;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 700;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+
+.followUpBox {
+  align-items: flex-end;
+  border-top: 1px solid #f3f4f6;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.followUpTextarea {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  border-radius: 12px !important;
+  resize: none !important;
+}
+
 .brandingCollapse :global(.ant-collapse-header) {
   padding: 0 0 8px !important;
   font-weight: 500;
@@ -301,6 +476,24 @@
 
   .textarea {
     padding: 14px 14px !important;
+  }
+
+  .planCard {
+    padding: 16px;
+  }
+
+  .planHeader,
+  .followUpBox {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .planHeader {
+    flex-direction: column;
+  }
+
+  .planMeta {
+    grid-template-columns: 1fr;
   }
 }
 
