@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Rel8r — Stakeholder Briefings",
+  title: "Slidz — Stakeholder Briefings",
   description:
     "Turn unstructured notes into scannable, stakeholder-ready briefing cards.",
 };

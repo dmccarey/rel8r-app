@@ -1,5 +1,5 @@
-const PREFIX = "rel8r:brief:";
-const INDEX_KEY = "rel8r:briefing-index";
+const PREFIX = "slidz:brief:";
+const INDEX_KEY = "slidz:briefing-index";
 const MAX_INDEX = 24;
 
 function summarizeBriefing(id, briefing) {

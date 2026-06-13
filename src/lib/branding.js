@@ -1,6 +1,6 @@
 import { analyzeLogoSafe } from "@/lib/analyze-logo";
 
-const STORAGE_KEY = "rel8r:default-branding";
+const STORAGE_KEY = "slidz:default-branding";
 
 export function normalizeBranding({
   orgName,

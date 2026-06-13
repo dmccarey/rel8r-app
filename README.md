@@ -1,4 +1,4 @@
-# Rel8r
+# Slidz
 
 Turn unstructured notes into stakeholder-ready briefing cards.
 
@@ -30,7 +30,7 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to use Rel8r.
+Open [http://localhost:3000](http://localhost:3000) to use Slidz.
 
 ## Tech Stack
 

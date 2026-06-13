@@ -404,7 +404,7 @@ export default function BriefingViewer({
         <header className={styles.topBar}>
           <div className={styles.headerBrandRow}>
             <Link href="/" className={styles.logo}>
-              Rel8r
+              Slidz
             </Link>
             <span className={styles.headerDivider} aria-hidden="true" />
             <h1 className={styles.briefingTitle}>{briefing.title}</h1>

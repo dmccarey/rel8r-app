@@ -15,7 +15,7 @@ export default function BrandMark({
     if (!linkHome) return null;
     return (
       <Link href="/" className={`${styles.fallback} ${styles[size]} ${className}`}>
-        Rel8r
+        Slidz
       </Link>
     );
   }
