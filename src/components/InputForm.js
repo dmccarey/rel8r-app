@@ -73,7 +73,7 @@ export default function InputForm() {
   return (
     <div className={styles.page}>
       <header className={styles.topBar}>
-        <span className={styles.logo}>Rel8r</span>
+        <span className={styles.logo}>Slidz</span>
       </header>
 
       <div className={styles.main}>
@@ -81,7 +81,7 @@ export default function InputForm() {
           <section className={styles.hero}>
             <h1 className={styles.headline}>Turn messy notes into updates people actually read</h1>
             <p className={styles.subtitle}>
-              Paste anything unstructured. Rel8r extracts the story, formats it for scanning, and gives you a link you
+              Paste anything unstructured. Slidz extracts the story, formats it for scanning, and gives you a link you
               can present or share.
             </p>
             <ul className={styles.features}>

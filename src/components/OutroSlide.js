@@ -2,7 +2,7 @@
 
 import styles from "./OutroSlide.module.css";
 
-const SIGNUP_URL = "https://rel8r.ai";
+const SIGNUP_URL = "https://slidz.us";
 
 export default function OutroSlide({ presentation = false }) {
   return (
@@ -12,7 +12,7 @@ export default function OutroSlide({ presentation = false }) {
       <div className={styles.cardInner}>
         <div className={styles.body}>
           <p className={styles.eyebrow}>Made with</p>
-          <h2 className={styles.brand}>Rel8r</h2>
+          <h2 className={styles.brand}>Slidz</h2>
           <p className={styles.prompt}>
             Turn messy notes into briefings people actually read.
           </p>
@@ -23,7 +23,7 @@ export default function OutroSlide({ presentation = false }) {
             className={styles.cta}
             onClick={(e) => e.stopPropagation()}
           >
-            Sign up at rel8r.ai
+            Sign up at Slidz.us
           </a>
         </div>
       </div>
